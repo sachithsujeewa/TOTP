@@ -6,10 +6,10 @@ const path = require('path');
 
 
 // Secret for TOTP generation
-const secret = otplib.authenticator.generateSecret();
+const secret = otplib.authenticator.generateSecret();  
 
 // Generate TOTP
-const token = otplib.authenticator.generate(secret);
+const token = otplib.authenticator.generate(secret);  
 
 // Display TOTP
 console.log('Generated TOTP:', token);
@@ -69,14 +69,14 @@ http.createServer((req, res) => {
 
     } else {
         // Serve the QR code image
-        const imagePath = path.join(__dirname, 'qrcode.png');
-        fs.readFile(imagePath, (err, data) => {
+        const htmlPath = path.join(__dirname, 'qrcode.html');
+        fs.readFile(htmlPath, (err, data) => {
             if (err) {
-                res.writeHead(500, { 'Content-Type': 'text/plain' });
-                res.end('Internal Server Error');
-                return;
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end('Internal Server Error');
+            return;
             }
-            res.writeHead(200, { 'Content-Type': 'image/png' });
+            res.writeHead(200, { 'Content-Type': 'text/html' });
             res.end(data);
         });
     }
